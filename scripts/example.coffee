@@ -20,7 +20,7 @@ module.exports = (robot) ->
     else
       res.reply "Opening #{doorType} doors"
 
-  robot.respond /hubot test/i, (res) ->
+  robot.hear /hubot test/i, (res) ->
     res.emote "beep boop"
 
   robot.hear /I like pie/i, (res) ->
