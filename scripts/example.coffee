@@ -64,6 +64,19 @@ module.exports = (robot) ->
         image  = msg.random images
         cb "#{image.unescapedUrl}#.png"
 
+  robot.hear /.*/, (msg) ->
+    text = msg.match[0]
+    prevMsg = robot.brain.get 'lastMessage'
+
+    robot.brain.set 'thisMessage', text
+
+  robot.hear /what/i, (msg) ->
+    if robot.brain.get 'lastMessage' != null
+      msg.send prevMsg.toUpperCase()
+
+    robot.brain.set 'lastMessage', robot.brain.get 'thisMessage'
+
+
   # robot.hear /I like pie/i, (res) ->
   #   res.emote "makes a freshly baked pie"
   #

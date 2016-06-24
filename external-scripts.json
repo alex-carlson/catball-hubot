@@ -9,5 +9,7 @@
   "hubot-maps",
   "hubot-redis-brain",
   "hubot-rules",
-  "hubot-shipit"
+  "hubot-shipit",
+  "hubot-dinner",
+  "hubot-loudbot"
 ]
