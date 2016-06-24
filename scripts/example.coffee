@@ -45,6 +45,25 @@ module.exports = (robot) ->
           if img.count > 0
             msg.send "http://mustachify.me/?src=#{escape img.src}"
 
+  robot.respond /buscemi?(?: me)? (.*)/i, (msg) ->
+    buscemi = "http://buscemi.heroku.com?src="
+    imagery = msg.match[1]
+
+    if imagery.match /^https?:\/\//i
+      msg.send "#{buscemi}#{imagery}"
+    else
+      imageMe msg, imagery, (url) ->
+        msg.send "#{buscemi}#{url}"
+
+  imageMe = (msg, query, cb) ->
+    msg.http('http://ajax.googleapis.com/ajax/services/search/images')
+      .query(v: "1.0", rsz: '8', q: query)
+      .get() (err, res, body) ->
+        images = JSON.parse(body)
+        images = images.responseData.results
+        image  = msg.random images
+        cb "#{image.unescapedUrl}#.png"
+
   # robot.hear /I like pie/i, (res) ->
   #   res.emote "makes a freshly baked pie"
   #
