@@ -29,10 +29,9 @@ module.exports = (robot) ->
     "http://2.bp.blogspot.com/_D_Z-D2tzi14/S8TiTtIFjpI/AAAAAAAACxQ/HXLdiZZ0goU/s320/ALOT14.png",
     "http://fc02.deviantart.net/fs70/f/2010/210/1/9/Alot_by_chrispygraphics.jpg"
   ]
-
-  module.exports = (robot) ->
-    robot.hear /(^|\W)alot(\z|\W|$)/i, (msg) ->
-      msg.send msg.random images
+  
+  robot.hear /(^|\W)alot(\z|\W|$)/i, (msg) ->
+    msg.send msg.random images
 
   # robot.hear /I like pie/i, (res) ->
   #   res.emote "makes a freshly baked pie"
