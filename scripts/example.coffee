@@ -29,9 +29,21 @@ module.exports = (robot) ->
     "http://2.bp.blogspot.com/_D_Z-D2tzi14/S8TiTtIFjpI/AAAAAAAACxQ/HXLdiZZ0goU/s320/ALOT14.png",
     "http://fc02.deviantart.net/fs70/f/2010/210/1/9/Alot_by_chrispygraphics.jpg"
   ]
-  
+
   robot.hear /(^|\W)alot(\z|\W|$)/i, (msg) ->
     msg.send msg.random images
+
+  robot.hear /^(https?:\/\/[^ #]+\.(?:png|jpg|jpeg))(?:[#]\.png)?$/i, (msg) ->
+    src = msg.match[1]
+
+    unless src.match(/^http:\/\/mustachify.me/)
+      msg.http("http://stacheable.herokuapp.com")
+        .query(src: src)
+        .get() (err, res, body) ->
+          img = JSON.parse body
+
+          if img.count > 0
+            msg.send "http://mustachify.me/?src=#{escape img.src}"
 
   # robot.hear /I like pie/i, (res) ->
   #   res.emote "makes a freshly baked pie"
