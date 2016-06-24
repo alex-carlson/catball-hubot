@@ -20,6 +20,9 @@ module.exports = (robot) ->
     else
       res.reply "Opening #{doorType} doors"
 
+  robot.respond /hubot test/i, (res) ->
+    res.emote "beep boop"
+
   robot.hear /I like pie/i, (res) ->
     res.emote "makes a freshly baked pie"
 
@@ -98,7 +101,7 @@ module.exports = (robot) ->
 
     else
       res.reply 'Sure!'
-  
+
       robot.brain.set 'totalSodas', sodasHad+1
 
   robot.respond /sleep it off/i, (res) ->
